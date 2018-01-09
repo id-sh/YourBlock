@@ -1,5 +1,7 @@
 pragma solidity ^0.4.4;
 
+import '../math/SafeMath.sol';
+
 contract YBKTokenTest is Ownable, Pausable, Mortal{
     
   using SafeMath for uint256;
