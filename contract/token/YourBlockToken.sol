@@ -1,6 +1,9 @@
 pragma solidity ^0.4.4;
 
 import '../math/SafeMath.sol';
+import "../ownership/Ownable.sol";
+import "../lifecycle/Pausable.sol";
+import "../lifecycle/Mortal.sol";
 
 contract YBKTokenTest is Ownable, Pausable, Mortal{
     
