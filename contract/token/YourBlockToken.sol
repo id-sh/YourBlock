@@ -24,10 +24,7 @@ contract YBKTokenTest is Ownable, Pausable, Mortal{
   // ERC20 Events
   event Transfer(address indexed _from, address indexed _to, uint256 _value);
   event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-  
-  //ERC223 Events
-  event Transfer(address indexed from, address indexed to, uint value, bytes indexed data);
-  
+   
   //Frozen event
   event FrozenFunds(address target, bool frozen);
 
@@ -76,21 +73,7 @@ contract YBKTokenTest is Ownable, Pausable, Mortal{
     Transfer(msg.sender, _to, _value);
     return true;
   }
-  
-  //ERC223 transfer
-  function transfer(address _to, uint256 _value, bytes _data) whenNotPaused public returns (bool success) {
-    require(_to != address(0));
-    require(_value <= balances[msg.sender]);
-    require(isContract(_to) == true);
-    require(!frozenAccount[msg.sender]);
-    balances[msg.sender] = balances[msg.sender].sub(_value);
-    balances[_to] = balances[_to].add(_value);
-    ERC223ReceivingContract _contract = ERC223ReceivingContract(_to);
-    _contract.tokenFallback(msg.sender, _value, _data);
-    Transfer(msg.sender, _to, _value, _data);
-    return true;
-  }
-  
+    
   //Check if to address is contract
   function isContract(address _addr) private constant returns (bool) {
         uint codeSize;
